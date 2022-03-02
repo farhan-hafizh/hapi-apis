@@ -3,8 +3,8 @@ const Hapi = require("hapi");
 
 const server = new Hapi.Server(
     {
-        "host": process.env['APP_URL'],
-        "port": process.env['PORT']
+        "host": process.env.APP_URL,
+        "port": process.env.PORT
     }
 );
 
