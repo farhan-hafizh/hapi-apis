@@ -8,9 +8,7 @@ server.route({
     method: "GET",
     path: "/user",
     handler: async(request, response) => {
-        let sql="SELECT * FROM users"
-        const dbConnection = await Connection.connect;
-        return data;
+        
     }
 });
 server.route({

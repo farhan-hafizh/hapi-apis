@@ -24,3 +24,8 @@ module.exports.createUser = (username,password,name) =>{
         return data
     })
 }
+module.exports.getAllUser = () =>{
+        User.findAll().then((data) => {
+            return data;
+        })
+}
