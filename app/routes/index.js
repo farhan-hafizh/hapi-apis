@@ -1,16 +1,16 @@
 
 module.exports = server =>{
-server.route([{
-    method: "GET",
-    path: "/user",
-    handler: getUser
-},
-{
-    method: "POST",
-    path: "/user/create",
-    handler: createUser
-}]);
-server.route(
+server.route([
+    {
+        method: "GET",
+        path: "/user",
+        handler: getUser
+    },
+    {
+        method: "POST",
+        path: "/user/create",
+        handler: createUser
+    },
     {
         method: "GET",
         path: "/",
@@ -18,17 +18,15 @@ server.route(
             console.log("tes");
             // return process.env.DB_NAME
         }
+    },
+    {
+        method: "POST",
+        path: "/add-contact",
+        handler: (request, response)=>{
+            
+        }
     }
-);
-
-
-server.route({
-    method: "POST",
-    path: "/add-contact",
-    handler: (request, response)=>{
-        
-    }
-})
+]);
 }
 const getUser = async(req, res) => {
     const Users = require('./../models/users');
@@ -37,6 +35,7 @@ const getUser = async(req, res) => {
     return data
 }
 const createUser = async(req,res)=>{
+    console.log(req.username)
     const User = require('./../models/users');
 
     const data = await User.createUser(req.username, req.password, req.name)
