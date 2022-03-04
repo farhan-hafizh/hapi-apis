@@ -19,13 +19,15 @@ const User = dbConnection.define('users',
     timestamps: false
 });
 
-module.exports.createUser = (username,password,name) =>{
+module.exports.createUser = async(username,password,name) =>{
     User.create({username, password, name }).then((data)=>{
         return data
     })
 }
-module.exports.getAllUser = () =>{
-        User.findAll().then((data) => {
-            return data;
-        })
+module.exports.getAllUser = async() =>{
+        const data = await User.findAll()
+        return data
+        // then((data) => {
+        //     return data;
+        // })
 }

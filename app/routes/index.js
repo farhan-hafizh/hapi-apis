@@ -1,32 +1,26 @@
 
 module.exports = server =>{
-    const Connection = require("./../dbconfig/index");
-    const Users = require('./../models/users');
-    const userController = require('./../controllers/userController')
-server.route({
+server.route([{
     method: "GET",
     path: "/user",
-    handler: async(request, response) => {
-        const data = userController.getAllUser();
-        
-    }
-});
-server.route({
-    method: "GET",
-    path: "/",
-    handler: (request, response) => {
-        xon
-    }
-});
-
-server.route({
+    handler: getUser
+},
+{
     method: "POST",
-    path: "/create",
-    handler: async(request, response) => {
-        const data = userController.createUser(request.payload);
-        return data;
+    path: "/user/create",
+    handler: createUser
+}]);
+server.route(
+    {
+        method: "GET",
+        path: "/",
+        handler: (request, response) => {
+            console.log("tes");
+            // return process.env.DB_NAME
+        }
     }
-});
+);
+
 
 server.route({
     method: "POST",
@@ -35,4 +29,17 @@ server.route({
         
     }
 })
+}
+const getUser = async(req, res) => {
+    const Users = require('./../models/users');
+    const data = await Users.getAllUser()
+    console.log(data)
+    return data
+}
+const createUser = async(req,res)=>{
+    const User = require('./../models/users');
+
+    const data = await User.createUser(req.username, req.password, req.name)
+  
+    return data;
 }
