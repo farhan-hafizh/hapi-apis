@@ -18,14 +18,14 @@ server.route([
             console.log("tes");
             // return process.env.DB_NAME
         }
-    },
-    {
-        method: "POST",
-        path: "/add-contact",
-        handler: (request, response)=>{
-            
-        }
     }
+    // {
+    //     method: "POST",
+    //     path: "/add-contact",
+    //     handler: (request, response)=>{
+            
+    //     }
+    // }
 ]);
 }
 const getUser = async(req, res) => {
@@ -35,10 +35,13 @@ const getUser = async(req, res) => {
     return data
 }
 const createUser = async(req,res)=>{
-    console.log(req.username)
-    const User = require('./../models/users');
-
-    const data = await User.createUser(req.username, req.password, req.name)
+    try {
+        const User = require('./../models/users');
+    
+        const data = await User.createUser(req.payload.username, req.payload.password, req.payload.name)
+    } catch (error) {
+        console.log(error)
+    }
   
     return data;
 }
